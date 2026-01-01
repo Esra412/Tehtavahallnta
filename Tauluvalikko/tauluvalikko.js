@@ -7,6 +7,10 @@ const joinInput = document.getElementById('board-code');
 const favoritesContainer = document.getElementById('favorites');
 const recentContainer = document.getElementById('recent');
 
+const RECENT_LIMIT = 5; //Määritellää äskettäisten taulujen limitti
+const RECENT_KEY = "recentBoards";
+
+
 const popup = document.getElementById('create-popup');
 const confirmCreate = document.getElementById('confirm-create');
 const cancelCreate = document.getElementById('cancel-create');
@@ -19,7 +23,7 @@ let currentUser = "testikäyttäjä"; // demo, korvaa oikealla kirjautuneella k�
 
 //teemat
 
-// Teemojen määrittely (tämä täytyy olla sama kuin Teema.js-tiedostossa)
+// Teemojen määrittely 
 const themes = [
   {
     bg: "#F1F3FE", 
@@ -129,9 +133,16 @@ function renderBoards() {
     const card = document.createElement('div');
     card.classList.add('board-card');
 
+    // Taulun nimi
     const title = document.createElement('span');
     title.textContent = b.title;
 
+    // Napit ⭐ + 🗑️
+    const buttonRow = document.createElement("div");
+    buttonRow.style.display = "flex";
+    buttonRow.style.gap = "8px";
+
+    // Suosikki
     const favBtn = document.createElement('button');
     favBtn.textContent = b.favorite ? "⭐" : "☆";
     favBtn.addEventListener('click', e => {
@@ -140,22 +151,57 @@ function renderBoards() {
       renderBoards();
     });
 
-    card.appendChild(title);
-    card.appendChild(favBtn);
+    // Poisto
+    const deleteBtn = document.createElement('button');
+    deleteBtn.textContent = "🗑️";
+    deleteBtn.addEventListener('click', e => {
+      e.stopPropagation();
+      deleteBoard(b.id);
+    });
 
+    buttonRow.appendChild(favBtn);
+    buttonRow.appendChild(deleteBtn);
+
+    card.appendChild(title);
+    card.appendChild(buttonRow);
+
+    // Taulun avaaminen
     card.addEventListener('click', () => openBoard(index));
+
     allBoards.appendChild(card);
 
+    // Suosikit-osio
     if (b.favorite) {
       const favCard = card.cloneNode(true);
+
       favCard.addEventListener('click', () => openBoard(index));
+
+      // Poiston toimivuus suosikeissa
+      favCard.querySelector("button:last-child")
+        .addEventListener("click", e => {
+          e.stopPropagation();
+          deleteBoard(b.id);
+        });
+
+      // Suosikin toimivuus 
+      favCard.querySelector("button:first-child")
+        .addEventListener("click", e => {
+          e.stopPropagation();
+          b.favorite = false;
+          renderBoards();
+        });
+
       favoritesContainer.appendChild(favCard);
     }
   });
 }
 
-// --- lataa taulut (eli taulut eivät poistu kun päivitetään sivu) ---
-document.addEventListener("DOMContentLoaded", loadBoards);
+
+// --- lataa taulut 
+document.addEventListener("DOMContentLoaded", () => {
+  loadBoards();
+  renderRecentBoards();
+});
 
 async function loadBoards() {
   try {
@@ -175,16 +221,21 @@ async function loadBoards() {
     alert("Taulut eivät latautuneet");
   }
 }
-// --- -------------------------- -------------------------------- ---
+
 
 // --- taulun avaaminen ---
 function openBoard(index) {
   const board = boards[index];
+
+  // Päivitä äskettäin avatut
+  updateRecentBoards(board);
+
   window.open(
     `../taulunakyma/taulunakyma.html?id=${board.id}`,
-    "_blank" // avaa uuteen välilehteen
+    "_blank"
   );
 }
+
 
 
 // --- taulujen haku ---
@@ -236,6 +287,39 @@ function renderFilteredBoards(filteredBoards) {
       favoritesContainer.appendChild(favCard);
     }
   });
+}
+//Poisto---------------------------------------------------
+async function deleteBoard(boardId) {
+  if (!confirm("Haluatko varmasti poistaa tämän taulun?")) return;
+
+  try {
+    const res = await fetch("delete_board.php", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ id: boardId })
+    });
+
+    const data = await res.json();
+
+    if (data.error) {
+      alert(data.error);
+      return;
+    }
+
+    // Poista taulu frontendistä
+    boards = boards.filter(b => b.id !== boardId);
+
+    // Poista myös äskettäisistä
+    let recent = JSON.parse(localStorage.getItem(RECENT_KEY)) || [];
+    recent = recent.filter(b => b.id !== boardId);
+    localStorage.setItem(RECENT_KEY, JSON.stringify(recent));
+
+    renderBoards();
+    renderRecentBoards();
+
+  } catch (err) {
+    alert("Taulun poisto epäonnistui");
+  }
 }
 
 async function applyUserSettings() {
@@ -303,3 +387,65 @@ document.addEventListener("DOMContentLoaded", () => {
     loadAndApplyUserSettings(); 
     loadBoards(); // Tämä lataa ne kadonneet taulut
 });
+
+async function deleteBoard(boardId) {
+  if (!confirm("Haluatko varmasti poistaa tämän taulun?")) return;
+
+  boards = boards.filter(b => b.id !== boardId);
+
+  // Poista myös äskettäisistä
+  let recent = JSON.parse(localStorage.getItem("recentBoards")) || [];
+  recent = recent.filter(b => b.id !== boardId);
+  localStorage.setItem("recentBoards", JSON.stringify(recent));
+
+  renderBoards();
+  renderRecentBoards();
+}
+
+
+function updateRecentBoards(board) {
+  let recent = JSON.parse(localStorage.getItem(RECENT_KEY)) || [];
+
+  // Poista jos taulu on jo listalla
+  recent = recent.filter(b => b.id !== board.id);
+
+  // Lisää kärkeen
+  recent.unshift({
+    id: board.id,
+    title: board.title
+  });
+
+  // Rajaa max 5
+  if (recent.length > RECENT_LIMIT) {
+    recent = recent.slice(0, RECENT_LIMIT);
+  }
+
+  localStorage.setItem(RECENT_KEY, JSON.stringify(recent));
+  renderRecentBoards();
+}
+
+function renderRecentBoards() {
+  recentContainer.innerHTML = "";
+
+  const recent = JSON.parse(localStorage.getItem(RECENT_KEY)) || [];
+
+  recent.forEach(r => {
+    const board = boards.find(b => b.id === r.id);
+    if (!board) return;
+
+    const card = document.createElement("div");
+    card.classList.add("board-card");
+
+    const title = document.createElement("span");
+    title.textContent = board.title;
+
+    card.appendChild(title);
+
+    card.addEventListener("click", () => {
+      const index = boards.indexOf(board);
+      openBoard(index);
+    });
+
+    recentContainer.appendChild(card);
+  });
+}
