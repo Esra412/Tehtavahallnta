@@ -30,14 +30,42 @@ const themes = [
     card: "#020617"
   }
 ];
+let selectedThemeIndex = 0;
+let selectedAvatarSrc = "profiili/avatar1.jpg";
 
 function setTheme(index) {
-  const theme = themes[index];
-  document.documentElement.style.setProperty('--bg', theme.bg);
-  document.documentElement.style.setProperty('--text', theme.text);
-  document.documentElement.style.setProperty('--accent', theme.accent);
-  document.documentElement.style.setProperty('--card', theme.card);
+    selectedThemeIndex = index; // tallennetaan valittu teema
+    const theme = themes[index];
+    document.documentElement.style.setProperty('--bg', theme.bg);
+    document.documentElement.style.setProperty('--text', theme.text);
+    document.documentElement.style.setProperty('--accent', theme.accent);
+    document.documentElement.style.setProperty('--card', theme.card);
 }
+
 function setAvatar(src) {
-  document.getElementById("top-avatar").src = src;
+    const relativePath = src.substring(src.lastIndexOf('profiili/'));
+    selectedAvatarSrc = relativePath;
+    document.getElementById("top-avatar").src = src;
+}
+
+// klikkaa "aseta teema ja profiilikuva" nappia niiin tieto menee dataan tallennus php tiedostoon
+async function saveSettings() {
+    try {
+        const response = await fetch('save_settings.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                theme_index: selectedThemeIndex,
+                profile_pic: selectedAvatarSrc
+            })
+        });
+        const result = await response.json();
+        if (result.success) {
+            alert("Asetukset tallennettu onnistuneesti!");
+        } else {
+            alert("Virhe: " + result.error);
+        }
+    } catch (error) {
+        console.error("Tallennusvirhe:", error);
+    }
 }

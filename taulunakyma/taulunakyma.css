@@ -25,10 +25,14 @@ body {
   height: 100vh;
 }
 
+.task-card {
+    background-color: var(--card);
+}
+
 /* Sivupalkki */
 .sidebar {
   width: 280px;
-  background: var(--sidebar-bg);
+  background: var(--card);
   padding: 25px;
   display: flex;
   flex-direction: column;
