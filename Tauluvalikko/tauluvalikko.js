@@ -298,7 +298,6 @@ async function loadAndApplyUserSettings() {
         console.error("Asetusten lataus epäonnistui:", error);
     }
 }
-
 // VAIN YKSI DOMContentLoaded-kuuntelija
 document.addEventListener("DOMContentLoaded", () => {
     loadAndApplyUserSettings(); 

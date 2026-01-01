@@ -18,7 +18,6 @@ $user_id = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : 1;
 if (isset($data['theme_index']) && isset($data['profile_pic'])) {
     $theme = (int)$data['theme_index'];
     $pic = $conn->real_escape_string($data['profile_pic']);
-
     // päivitä tietokanta
     $sql = "UPDATE users SET theme_index = $theme, profile_pic = '$pic' WHERE id = $user_id";
     
