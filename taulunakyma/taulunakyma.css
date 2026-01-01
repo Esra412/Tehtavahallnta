@@ -1,0 +1,265 @@
+:root {
+  --bg: #f6f8fb;
+  --card: #ffffff;
+  --accent: #6c63ff;
+  --muted: #6b7280;
+
+  /* johdetut värit */
+  --primary: var(--accent);
+  --text: #111827;
+  --sidebar-bg: #eef2ff;
+  --border: #e5e7eb;
+  --danger: #ef4444;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', -apple-system, sans-serif;
+  background-color: var(--bg);
+  color: var(--text);
+  margin: 0;
+  display: flex;
+  height: 100vh;
+}
+
+/* Sivupalkki */
+.sidebar {
+  width: 280px;
+  background: var(--sidebar-bg);
+  padding: 25px;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  border-right: 1px solid var(--border);
+}
+
+.sidebar h2 {
+  font-size: 1.5rem;
+  margin-bottom: 5px;
+  color: var(--accent);
+}
+
+.sidebar p {
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin-bottom: 30px;
+}
+
+.category-list {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.category-item {
+  display: flex;
+  margin-bottom: 8px;
+}
+
+.category-btn {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: var(--text);
+  padding: 12px;
+  text-align: left;
+  cursor: pointer;
+  border-radius: 10px 0 0 10px;
+  font-size: 1rem;
+}
+
+.category-btn:hover {
+  background: rgba(108, 99, 255, 0.1);
+}
+
+.category-btn.active {
+  background: var(--accent);
+  color: white;
+}
+
+.delete-board-x {
+  background: transparent;
+  color: var(--muted);
+  border: none;
+  padding: 12px;
+  cursor: pointer;
+  font-size: 1.2rem;
+  border-radius: 0 10px 10px 0;
+}
+
+.category-btn.active + .delete-board-x {
+  background: var(--accent);
+  color: white;
+}
+
+.add-board-btn {
+  background: var(--accent);
+  color: white;
+  border: none;
+  padding: 14px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: bold;
+  margin-top: 15px;
+}
+
+/* Pääsisältö */
+.main-content {
+  flex: 1;
+  padding: 50px;
+  overflow-y: auto;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+.input-group {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 30px;
+  background: var(--card);
+  padding: 15px;
+  border-radius: 15px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+}
+
+input[type="text"] {
+  flex: 1;
+  padding: 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  outline: none;
+}
+
+input[type="text"]:focus {
+  border-color: var(--accent);
+}
+
+/* Napit */
+.btn {
+  padding: 10px 18px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.2s;
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: white;
+}
+
+.btn-primary:hover {
+  opacity: 0.9;
+}
+
+.btn-danger {
+  background: #fee2e2;
+  color: var(--danger);
+  margin-left: 20px;
+}
+
+.btn-danger:hover {
+  background: var(--danger);
+  color: white;
+}
+
+/* Tehtävälista */
+.todo-list {
+  display: grid;
+  gap: 15px;
+}
+
+.todo-item {
+  background: var(--card);
+  padding: 20px;
+  border-radius: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+  border-left: 6px solid var(--accent);
+}
+
+.todo-item.completed {
+  border-left-color: var(--muted);
+  opacity: 0.6;
+}
+
+.todo-item.completed span {
+  text-decoration: line-through;
+  color: var(--muted);
+}
+
+.todo-content {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  cursor: pointer;
+  flex: 1;
+}
+
+/* Modal */
+.modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  backdrop-filter: blur(6px);
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: var(--card);
+  padding: 40px;
+  border-radius: 24px;
+  width: 420px;
+  text-align: center;
+  box-shadow: 0 25px 50px rgba(0,0,0,0.25);
+}
+
+.modal-content h3 {
+  margin-top: 0;
+  font-size: 1.5rem;
+}
+
+.modal-content p {
+  color: var(--muted);
+  margin-bottom: 20px;
+}
+
+/* Jakokoodi */
+.share-code-box {
+  background: #eef2ff;
+  padding: 20px;
+  border-radius: 15px;
+  border: 2px dashed var(--accent);
+  color: var(--accent);
+  font-size: 2rem;
+  font-weight: 800;
+  letter-spacing: 4px;
+  margin: 20px 0;
+  font-family: monospace;
+}
+
+.modal-input {
+  width: 100%;
+  padding: 14px;
+  margin-bottom: 20px;
+  border: 2px solid var(--border);
+  border-radius: 12px;
+  outline: none;
+}
+
+.modal-input:focus {
+  border-color: var(--accent);
+}
