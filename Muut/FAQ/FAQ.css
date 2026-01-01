@@ -23,11 +23,12 @@ body {
   padding: 20px;
 }
 
+/* Vaihda h1-väri */
 h1 {
   text-align: center;
   font-size: 40px;
   margin-bottom: 10px;
-  color: #2f2f2f;
+  color: var(--text); /* Muutettu: käytti aiemmin kovaa väriä #2f2f2f */
 }
 
 .subtitle {
@@ -63,7 +64,7 @@ h1 {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  color: #2f2f2f;
+    color: var(--text); /* Muutettu: käytti aiemmin kovaa väriä #2f2f2f */
 }
 
 .faq-question:hover {

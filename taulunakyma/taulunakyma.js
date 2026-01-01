@@ -7,6 +7,16 @@ let todos = [];
 let currentCategory = ""; 
 let categoryMap = {}; // { "Kategorian Nimi": ID_tietokannassa }
 
+//teemat
+
+const themes = [
+  { bg: "#F1F3FE", text: "#6B7280", accent: "#6C63FF", card: "#bbc1d4ff" },
+  { bg: "#fff7e6", text: "#0f2a44", accent: "#ff8fb3", card: "#ffffff" },
+  { bg: "#55423d", text: "#fff3ec", accent: "#ffc0ad", card: "#271c19" },
+  { bg: "#11120D", text: "#FFFAF4", accent: "#D8CFBC", card: "#565448" },
+  { bg: "#0f172a", text: "#e2e8f0", accent: "#38bdf8", card: "#020617" }
+];
+
 // --- 1. DATAN LATAUS ---
 async function initializeData() {
     if (!currentBoardId) return;
@@ -303,6 +313,32 @@ function closeModal(id) {
     const modal = document.getElementById(id);
     if (modal) modal.style.display = 'none'; 
 }
+
+async function applyTheme() {
+    try {
+        // Varmista, että polku osoittaa oikeaan paikkaan (get_user_settings.php)
+        const response = await fetch('../Muut/Teema/get_user_settings.php'); 
+        const data = await response.json();
+
+        if (data.success) {
+            const theme = themes[data.theme_index];
+            if (theme) {
+                document.documentElement.style.setProperty('--bg', theme.bg);
+                document.documentElement.style.setProperty('--text', theme.text);
+                document.documentElement.style.setProperty('--accent', theme.accent);
+                document.documentElement.style.setProperty('--card', theme.card);
+            }
+        }
+    } catch (error) {
+        console.error("Teeman lataus epäonnistui taulunäkymässä:", error);
+    }
+}
+
+// Lisää tämä olemassa olevaan DOMContentLoaded-tapahtumaan
+document.addEventListener("DOMContentLoaded", () => {
+    applyTheme();
+    // muut taulunäkymän latausfunktiot tähän...
+});
 
 // Käynnistys
 initializeData();
