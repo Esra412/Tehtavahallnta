@@ -17,6 +17,43 @@ let boards = [];
 let recentBoards = [];
 let currentUser = "testikäyttäjä"; // demo, korvaa oikealla kirjautuneella käyttäjällä
 
+//teemat
+
+// Teemojen määrittely (tämä täytyy olla sama kuin Teema.js-tiedostossa)
+const themes = [
+  {
+    bg: "#F1F3FE", 
+    text: "#6B7280",
+    accent: "#6C63FF",
+    card: "#bbc1d4ff"
+  },
+  {
+    bg: "#fff7e6", 
+    text: "#0f2a44",
+    accent: "#ff8fb3",
+    card: "#ffffff"
+  },
+  {
+    bg: "#55423d",
+    text: "#fff3ec",
+    accent: "#ffc0ad",
+    card: "#271c19"
+  },
+  {
+    bg: "#11120D",
+    text: "#FFFAF4",
+    accent: "#D8CFBC",
+    card: "#565448"
+  },
+  {
+    bg: "#0f172a",
+    text: "#e2e8f0",
+    accent: "#38bdf8",
+    card: "#020617"
+  }
+];
+
+
 // --- profiili ---
 profilePic.addEventListener('click', () => {
   profileMenu.classList.toggle('hidden');
@@ -201,3 +238,64 @@ function renderFilteredBoards(filteredBoards) {
   });
 }
 
+async function applyUserSettings() {
+    try {
+        const res = await fetch('../Muut/Teema/get_user_settings.php'); 
+        const user = await res.json();
+        
+        if (user.success) {
+            // asenna teema
+            const userTheme = themes[user.theme_index]; 
+            if(userTheme) {
+                document.documentElement.style.setProperty('--bg', userTheme.bg);
+                document.documentElement.style.setProperty('--accent', userTheme.accent);
+                document.documentElement.style.setProperty('--card', userTheme.card);
+            }
+            
+            // päivitä profiilikuva
+            const profilePicEl = document.getElementById('profile-pic');
+            if (profilePicEl) {
+                profilePicEl.src = "../Muut/Teema/" + user.profile_pic;
+            }
+        }
+    } catch (err) {
+        console.log("Asetusten latausvirhe");
+    }
+}
+
+//  
+document.addEventListener("DOMContentLoaded", () => {
+    applyUserSettings(); // lataa käyttäjän asetukset
+    loadBoards();
+});
+
+
+async function loadAndApplyUserSettings() {
+    try {
+        // Huom: varmista että polku on oikea (esim. '../Muut/Teema/get_user_settings.php')
+        const response = await fetch('get_user_settings.php'); 
+        const data = await response.json();
+
+        if (data.success) {
+            // 1. Käytä teemaa
+            const theme = themes[data.theme_index];
+            if (theme) {
+                document.documentElement.style.setProperty('--bg', theme.bg);
+                document.documentElement.style.setProperty('--text', theme.text);
+                document.documentElement.style.setProperty('--accent', theme.accent);
+                document.documentElement.style.setProperty('--card', theme.card);
+            }
+
+            // 2. Päivitä profiilikuva
+            const profileImg = document.getElementById("profile-pic"); // Varmista että ID on oikein HTML:ssä
+            if (profileImg) {
+                profileImg.src = data.profile_pic;
+            }
+        }
+    } catch (error) {
+        console.error("Asetusten lataus epäonnistui:", error);
+    }
+}
+
+// Kutsu funktiota heti kun sivu latautuu
+document.addEventListener("DOMContentLoaded", loadAndApplyUserSettings);
