@@ -78,10 +78,20 @@ body {
 
 /* animaatio??? */
 .blobanimation {
+    width: 400px;
+    height: 400px;
+    background: var(--accent);
+    opacity: 0.15;
 
-   border-bottom-left-radius: 79.7271% 74.9727%;
-    border-bottom-right-radius: 20.2728%;
-    border-top-left-radius: 49.8909% 25.0273%;
-    border-top-right-radius: 50.1091% 79.7271%;
+    border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+    animation: blob 10s infinite alternate ease-in-out;
+}
 
+@keyframes blob {
+    from {
+        border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+    }
+    to {
+        border-radius: 50% 50% 20% 80% / 25% 80% 20% 75%;
+    }
 }
