@@ -1,0 +1,60 @@
+{
+  "heroTitle": "Manage your tasks easily",
+  "heroText": "Esra & Daniela TaskManager is a task management application developed by Eduko media students. It helps keep projects and tasks clear and efficient.",
+  "login": "Login",
+
+
+
+  "registerPageTitle": "Register",
+  "welcomeTitle": "Welcome",
+  "welcomeText": "Create an account or log in with an existing one. Registration uses an email verification code.",
+  "featureEmail": "Email",
+  "featurePassword": "Password",
+  "featureCode": "Verification code",
+  "register": "Register",
+  "email": "Email",
+  "password": "Password",
+  "verifyCodeLabel": "Verification code (email)",
+  "sendCode": "Send code",
+
+
+  "boardMenuTitle": "Board Menu",
+  "createBoardTitle": "Create new board",
+  "boardName": "Board name",
+  "privateBoard": "Private",
+  "publicBoard": "Public (generate code)",
+  "createBoard": "Create board",
+  "createBoardUpper": "CREATE BOARD",
+  "cancel": "Cancel",
+  "searchBoard": "Search board by name...",
+  "boardCode": "Code",
+  "shortcuts": "Shortcuts",
+  "theme": "Theme",
+  "faq": "FAQ",
+  "logout": "Logout",
+  "favorites": "Favorites",
+  "recent": "Recently viewed",
+  "boards": "Boards",
+  "showMore": "Show more",
+
+
+  "sidebar_subtitle": "Professional Management",
+  "btn_create_board": "+ Create mini board",
+  "loading": "Loading...",
+  "btn_share": "🔗 Share board",
+  "input_todo_placeholder": "Write a new task...",
+  "btn_add": "Add",
+  "modal_create_title": "Create new mini board",
+  "modal_create_text": "Give a name to the new board:",
+  "modal_create_placeholder": "e.g. School, Work...",
+  "btn_cancel": "Cancel",
+  "btn_create": "Create",
+  "modal_share_title": "Share board with a friend 🚀",
+  "modal_share_text": "Here is the share code:",
+  "tooltip_copy": "Copy to clipboard",
+  "modal_share_email": "Send code directly via Gmail:",
+  "modal_share_placeholder": "friend@gmail.com",
+  "btn_close": "Close",
+  "btn_send": "Send"
+}
+

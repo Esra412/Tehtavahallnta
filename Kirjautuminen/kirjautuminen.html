@@ -3,68 +3,71 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Rekisteröidy</title>
-    <link rel="stylesheet" href="kirjautuminen.css" />
+  <title data-i18n="registerPageTitle"></title>
+  <link rel="stylesheet" href="kirjautuminen.css" />
 </head>
+
 <body>
   <div class="card" role="region" aria-label="Kirjautuminen ja Rekisteröinti">
     <div class="hero">
-      <h1>Tervetuloa</h1>
-      <p>Luo tili tai kirjaudu olemassa olevalla tilillä. Rekisteröinnissä käytetään sähköpostivarmennuskoodia.</p>
+      <h1 data-i18n="welcomeTitle"></h1>
+      <p data-i18n="welcomeText"></p>
+
       <div class="features">
-        <div class="feature">Sähköposti</div>
-        <div class="feature">Salasana</div>
-        <div class="feature">Varmennuskoodi</div>
+        <div class="feature" data-i18n="featureEmail"></div>
+        <div class="feature" data-i18n="featurePassword"></div>
+        <div class="feature" data-i18n="featureCode"></div>
       </div>
     </div>
 
     <div class="forms">
       <div class="tabs" role="tablist">
-        <div class="tab active" id="tab-register" role="tab" tabindex="0">Rekisteröidy</div>
-        <div class="tab" id="tab-login" role="tab" tabindex="0">Kirjaudu</div>
+        <div class="tab active" id="tab-register" role="tab" tabindex="0" data-i18n="register"></div>
+        <div class="tab" id="tab-login" role="tab" tabindex="0" data-i18n="login"></div>
       </div>
 
       <!-- Register -->
       <form id="register-form" aria-hidden="false">
-        <label for="reg-email">Sähköposti</label>
+        <label for="reg-email" data-i18n="email"></label>
         <input id="reg-email" type="email" placeholder="nimi@example.com" required />
 
-        <label for="reg-password">Salasana</label>
-        <input id="reg-password" type="password" placeholder="Salasanasi" minlength="6" required />
+        <label for="reg-password" data-i18n="password"></label>
+        <input id="reg-password" type="password" placeholder="" minlength="6" required />
 
         <div class="row">
           <div style="flex:1">
-            <label for="reg-code">Varmennuskoodi (sähköposti)</label>
-            <input id="reg-code" type="text" placeholder="Lähetetty koodi" />
+            <label for="reg-code" data-i18n="verifyCodeLabel"></label>
+            <input id="reg-code" type="text" placeholder="" />
           </div>
           <div style="width:140px;display:flex;align-items:end;">
-            <button type="button" id="send-code" class="btn ghost">Lähetä koodi</button>
+            <button type="button" id="send-code" class="btn ghost" data-i18n="sendCode"></button>
           </div>
         </div>
 
         <div id="reg-msg" class="small"></div>
         <div style="display:flex;gap:8px;align-items:center;justify-content:flex-end;margin-top:6px">
-          <button type="submit" class="btn">Rekisteröidy</button>
+          <button type="submit" class="btn" data-i18n="register"></button>
         </div>
       </form>
 
       <!-- Login -->
       <form id="login-form" aria-hidden="true" style="display:none">
-        <label for="login-email">Sähköposti</label>
+        <label for="login-email" data-i18n="email"></label>
         <input id="login-email" type="email" placeholder="nimi@example.com" required />
 
-        <label for="login-password">Salasana</label>
-        <input id="login-password" type="password" placeholder="Salasanasi" required />
+        <label for="login-password" data-i18n="password"></label>
+        <input id="login-password" type="password" placeholder="" required />
 
         <div id="login-msg" class="small"></div>
         <div style="display:flex;gap:8px;align-items:center;justify-content:flex-end;margin-top:6px">
-          <button type="submit" class="btn">Kirjaudu</button>
+          <button type="submit" class="btn" data-i18n="login"></button>
         </div>
       </form>
-
     </div>
   </div>
-  
-    <script src="kirjautuminen.js"></script>
+
+  <!-- MONIKIELISYYS -->
+  <script src="../js/language.js"></script>
+  <script src="kirjautuminen.js"></script>
 </body>
 </html>

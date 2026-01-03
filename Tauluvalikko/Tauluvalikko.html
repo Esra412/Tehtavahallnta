@@ -3,24 +3,25 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Fake Trello - Tauluvalikko</title>
+  <title data-i18n="boardMenuTitle"></title>
   <link rel="stylesheet" href="tauluvalikko.css">
 </head>
 <body>
 
 <div id="create-popup" class="popup hidden">
   <div class="popup-content">
-    <h3>Luo uusi taulu</h3>
-    <input type="text" id="new-board-title" placeholder="Taulun nimi">
+    <h3 data-i18n="createBoardTitle"></h3>
+    <input type="text" id="new-board-title" placeholder="" data-i18n-placeholder="boardName">
     <select id="privacy-select">
-      <option value="private">Yksityinen</option>
-      <option value="public">Julkinen (luo koodi)</option>
+      <option value="private" data-i18n="privateBoard"></option>
+      <option value="public" data-i18n="publicBoard"></option>
     </select>
-    <button id="confirm-create">Luo taulu</button>
-    <button id="cancel-create">Peruuta</button>
+    <button id="confirm-create" data-i18n="createBoard"></button>
+    <button id="cancel-create" data-i18n="cancel"></button>
   </div>
 </div>
 
+<<<<<<< Updated upstream
   <div class="top-bar">
     <img src="img/edukosmall.png" class="edukologo">
     <input type="text" id="search-board" placeholder="Hae taulua nimellä...">
@@ -32,8 +33,19 @@
     <button id="create-board-btn">LUO TAULU</button>
     <img id="profile-pic" src="../Muut/Teema/profiili/avatar1.jpg" alt="Profiili">
   </div>
+=======
+<div class="top-bar">
+  <img src="img/edukosmall.png" class="edukologo">
+>>>>>>> Stashed changes
 
-  <hr>
+  <input type="text" id="search-board" placeholder="" data-i18n-placeholder="searchBoard">
+  <input type="text" id="board-code" placeholder="" data-i18n-placeholder="boardCode">
+
+  <button id="create-board-btn" data-i18n="createBoardUpper"></button>
+  <img id="profile-pic" src="../Muut/Teema/profiili/avatar1.jpg" alt="Profiili">
+</div>
+
+<hr>
 
   <div class="profile-menu hidden">
     <button onclick="alert('Oikotiet')">Oikotiet</button>
@@ -42,17 +54,21 @@
     <button onclick="logout()">Kirjaudu ulos</button>
   </div>
 
-  <div class="sections">
-    <h2>Suosikit</h2>
-    <div class="boards-row" id="favorites"></div>
+<div class="sections">
+  <h2 data-i18n="favorites"></h2>
+  <div class="boards-row" id="favorites"></div>
 
-    <h2>Äskettäin katsotut</h2>
-    <div class="boards-row" id="recent"></div>
+  <h2 data-i18n="recent"></h2>
+  <div class="boards-row" id="recent"></div>
 
-    <h2>Taulut</h2>
-    <div class="boards-row" id="all-boards"></div>
-    <button id="show-more-btn" class="hidden">Näytä lisää</button>
-  </div>
-</body>
+  <h2 data-i18n="boards"></h2>
+  <div class="boards-row" id="all-boards"></div>
+
+  <button id="show-more-btn" class="hidden" data-i18n="showMore"></button>
+</div>
+
+<!-- MONIKIELISYYS -->
+<script src="../js/language.js"></script>
 <script src="tauluvalikko.js"></script>
+</body>
 </html>
