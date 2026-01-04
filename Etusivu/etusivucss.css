@@ -1,0 +1,97 @@
+:root {
+    --bg: #f6f8fb;
+    --card: #ffffff;
+    --accent: #6c63ff;
+    --muted: #6b7280;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Inter, system-ui, sans-serif;
+    background: var(--bg);
+    margin: 0;
+    padding: 40px;
+}
+
+/* yläbaari*/
+.top-bar {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 60px;
+}
+
+.edukologo {
+    width: 80px;
+    height: auto;
+}
+
+.HeadTaskmanager {
+    font-size: 24px;
+    color: #6C63FF;
+}
+
+/* päälayout */
+.main-layout {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* vasenpuoli*/
+.left-content {
+    max-width: 500px;
+}
+
+.left-content h1 {
+    font-size: 36px;
+    margin-bottom: 20px;
+    color: #2D2D2D;
+}
+
+.left-content p {
+    color: #2D2D2D;
+    line-height: 1.6;
+    margin-bottom: 30px;
+}
+
+/* nappi */
+.login-btn {
+    padding: 12px 32px;
+    color:#E3E4FE;
+    font-size: 16px;
+    border-radius: 12px;
+    border: 2px solid black;
+    background: #6C63FF;
+    cursor: pointer;
+}
+
+/* oikeapuoli*/
+.right-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* animaatio??? */
+.blobanimation {
+    width: 400px;
+    height: 400px;
+    background: var(--accent);
+    opacity: 0.15;
+
+    border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+    animation: blob 10s infinite alternate ease-in-out;
+}
+
+@keyframes blob {
+    from {
+        border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+    }
+    to {
+        border-radius: 50% 50% 20% 80% / 25% 80% 20% 75%;
+    }
+}

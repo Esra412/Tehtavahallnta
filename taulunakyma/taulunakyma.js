@@ -231,7 +231,7 @@ async function sendCodeViaEmail() {
     }
 
     try {
-        const response = await fetch('send_code_email.php', {
+        const response = await fetch('../taulunakyma/send_code_email.php', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({

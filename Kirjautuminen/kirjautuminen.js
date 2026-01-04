@@ -131,3 +131,4 @@ loginForm.addEventListener('submit', async (e)=>{
     showLoginMessage('<span class="error">Palvelinvirhe: '+err.message+'</span>');
   }
 });
+
