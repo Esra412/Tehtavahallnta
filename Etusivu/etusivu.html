@@ -17,14 +17,20 @@
             <h2 class="HeadTaskmanager">Taskmanager</h2>
         </div>
 
-        <div class="top-right">
-            <button class="faq-btn">Usein kysytyt</button>
-        <select id="language-select" class="language-select">
-             <option value="fi">🇫🇮 Suomi</option>
-             <option value="en">🇬🇧 English</option>
-             <option value="tr">🇹🇷 Türkçe</option>
-    </select>
+    <div class="top-right">
+        <button class="faq-btn">Usein kysytyt</button>
+        
+        <div class="custom-select-container">
+            <div class="select-selected" id="selected-lang">
+                <span class="flag-icon fi"></span> Suomi
+            </div>
+            <div class="select-items select-hide" id="lang-options">
+                <div data-value="fi"><span class="flag-icon fi"></span> Suomi</div>
+                <div data-value="en"><span class="flag-icon en"></span> English</div>
+                <div data-value="tr"><span class="flag-icon tr"></span> Türkçe</div>
+            </div>
         </div>
+    </div>
     </div>
 
     <!-- PÄÄLAYOUT -->

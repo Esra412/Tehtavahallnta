@@ -159,3 +159,72 @@ body {
         border-radius: 50% 50% 20% 80% / 25% 80% 20% 75%;
     }
 }
+
+/* LIPPU-IKONIT */
+/* LIPPUJEN TYYLIT (Käyttäen ehdottamaasi tapaa) */
+.flag-icon {
+    width: 20px;
+    height: 15px;
+    display: inline-block;
+    background-size: cover;
+    background-position: center;
+    border-radius: 2px;
+}
+
+.flag-icon.fi { background-image: url('https://flagicons.lipis.dev/flags/4x3/fi.svg'); }
+.flag-icon.en { background-image: url('https://flagicons.lipis.dev/flags/4x3/gb.svg'); }
+.flag-icon.tr { background-image: url('https://flagicons.lipis.dev/flags/4x3/tr.svg'); }
+
+/* CUSTOM DROPDOWN ULKOASU */
+.custom-select-container {
+    position: relative;
+    width: 140px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.select-selected {
+    background-color: white;
+    padding: 10px 14px;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    transition: 0.2s;
+}
+
+.select-selected:hover {
+    border-color: var(--accent);
+}
+
+.select-items {
+    position: absolute;
+    background-color: white;
+    top: calc(100% + 8px);
+    left: 0;
+    right: 0;
+    z-index: 99;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+.select-items div {
+    padding: 10px 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: background 0.2s;
+}
+
+.select-items div:hover {
+    background-color: #f0f0ff;
+}
+
+/* Piilotusluokka */
+.select-hide {
+    display: none;
+}
