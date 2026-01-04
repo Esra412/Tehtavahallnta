@@ -10,37 +10,43 @@
 
 <body>
 
+
     <!-- yläbar -->
     <div class="top-bar">
         <img src="img/edukosmall.png" alt="Eduko logo" class="edukologo">
         <h2 class="HeadTaskmanager">Taskmanager</h2>
+
+        <!-- KIELIVALINTA -->
+        <select id="language-select" class="language-select">
+            <option value="fi">Suomi</option>
+            <option value="en">English</option>
+            <option value="tr">Türkçe</option>
+        </select>
     </div>
 
-    <!-- KEskellä -->
+    <!-- Keskellä -->
     <div class="main-layout">
 
-        <!--Vasenlaatikko -->
+        <!-- Vasen laatikko -->
         <div class="left-content">
-            <h1>Hallitse tehtäväsi helposti</h1>
+            <h1 data-i18n="heroTitle"></h1>
 
-            <p>
-                Esra & Daniela TaskManager on Edukon viestintäalan opiskelijoiden
-                kehittämä tehtävienhallintasovellus. Sen avulla projektien ja
-                tehtävien hallinta on selkeää ja tehokasta.
-            </p>
+            <p data-i18n="heroText"></p>
 
-            <button class="login-btn">Kirjaudu</button>
+            <button class="login-btn" data-i18n="login"></button>
         </div>
 
-    <!--Oikealaatikko-->
+        <!-- Oikea laatikko -->
         <div class="right-content">
-            <div class="blobanimation">
-                
-            </div>
+            <div class="blobanimation"></div>
         </div>
 
     </div>
 
-</body>
+    <!-- KIELI + ETUSIVU JS -->
+    <script src="../js/language.js"></script>
+    <script src="../Etusivu/etusivu.js"></script>
 
+</body>
 </html>
+

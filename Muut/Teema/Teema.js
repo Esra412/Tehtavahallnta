@@ -69,3 +69,5 @@ async function saveSettings() {
         console.error("Tallennusvirhe:", error);
     }
 }
+
+console.log("TEEMA HTML LADATTU");
