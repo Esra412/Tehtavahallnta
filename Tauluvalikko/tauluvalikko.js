@@ -292,49 +292,58 @@ document.addEventListener("DOMContentLoaded", () => {
 /* =======================
    LIITY KOODILLA
 ======================= */
-const joinBtn = document.getElementById("join-board-btn");
-const codeInput = document.getElementById("board-code");
+/* =======================
+   LIITY KOODILLA
+======================= */
+// Sayfa yüklenince çalışmasını sağla
+document.addEventListener("DOMContentLoaded", () => {
+    const joinBtn = document.getElementById("join-board-btn");
+    const codeInput = document.getElementById("board-code");
 
-joinBtn.addEventListener("click", async () => {
-  const code = codeInput.value.trim();
+    // Sadece buton sayfada varsa kodu çalıştır (Hata almanı engeller)
+    if (joinBtn) {
+        joinBtn.addEventListener("click", async () => {
+            const code = codeInput.value.trim();
 
-  if (!code) {
-    alert("Syötä koodi");
-    return;
-  }
+            if (!code) {
+                alert("Syötä koodi");
+                return;
+            }
 
-  try {
-    const res = await fetch("join_board.php", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ code })
-    });
+            try {
+                const res = await fetch("../tauluvalikko/join_board.php", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ code })
+                });
 
-    const data = await res.json();
+                const data = await res.json();
 
-    if (!data.success) {
-      alert("Koodi on väärin");
-      return;
+                if (!data.success) {
+                    alert("Koodi on väärin");
+                    return;
+                }
+
+                // Mevcut diziye ekle ve arayüzü güncelle
+                if (typeof boards !== 'undefined') {
+                    boards.push({
+                        id: data.board_id,
+                        title: data.title,
+                        visibility: "shared",
+                        code: code,
+                        favorite: false
+                    });
+                    renderBoards();
+                }
+
+                // Yeni sekmede aç
+                window.open(`../taulunakyma/taulunakyma.html?id=${data.board_id}`, "_blank");
+                codeInput.value = "";
+
+            } catch (err) {
+                console.error(err);
+                alert("Palvelinvirhe");
+            }
+        });
     }
-
-    boards.push({
-      id: data.board_id,
-      title: data.title,
-      visibility: "shared",
-      code: code,
-      favorite: false
-    });
-
-    renderBoards();
-
-    window.open(
-      `../taulunakyma/taulunakyma.html?id=${data.board_id}`,
-      "_blank"
-    );
-
-    codeInput.value = "";
-
-  } catch {
-    alert("Palvelinvirhe");
-  }
 });
