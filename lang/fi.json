@@ -27,11 +27,13 @@
   "createBoardUpper": "LUO TAULU",
   "cancel": "Peruuta",
   "searchBoard": "Hae taulua nimellä...",
+  "joinBtn": "VALMIS",
   "boardCode": "Koodi",
   "favorites": "Suosikit",
   "recent": "Äskettäin katsotut",
   "boards": "Taulut",
   "showMore": "Näytä lisää",
+
 
   "shortcuts": "Oikotiet",
   "theme_btn": "Teema",

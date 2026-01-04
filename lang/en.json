@@ -27,6 +27,7 @@
   "createBoardUpper": "CREATE BOARD",
   "cancel": "Cancel",
   "searchBoard": "Search board by name...",
+  "joinBtn": "READY",
   "boardCode": "Code",
   "favorites": "Favorites",
   "recent": "Recently viewed",
